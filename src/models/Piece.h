@@ -20,6 +20,13 @@ class Piece
 	public:
 		Piece();
 		void grading();
+		int getBar();
+		void setBar(int _bar);
+		float getTempo();
+		void setTempo(float _tempo);
+		int getNumberOfChords();
+		void setNumberOfChords(int _numberOfChords);
+		Chord* getChord(int index);
 };
 
 #endif //PIECE_H
