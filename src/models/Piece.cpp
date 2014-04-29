@@ -12,17 +12,6 @@ Piece::Piece()
 	}
 }
 
-int Piece::getBar(){return bar;}
-void setBar(int _bar){ bar = _bar;}
-
-float getTempo(){return tempo;}
-void setTempo(float _tempo){ tempo = _tempo;}
-
-int getNumberOfChords(){return numberOfChords;}
-void setNumberOfChords(int _numberOfChords){ numberOfChords = _numberOfChords;}
-
-Chord* getChord(int index){return chords;}
-
 /*void Piece::grading()
 {
 	// A chord J will be evaluated thanks to a comparison with J-1 and J+1
@@ -80,3 +69,38 @@ Chord* getChord(int index){return chords;}
 	// Evaluation of the Piece thanks to the SUM of the chords
 	mark = mark / numberOfChords;
 }*/
+
+int Piece::getBar()
+{
+	return bar;
+}
+
+void setBar(int _bar)
+{
+	bar = _bar;
+}
+
+float getTempo()
+{
+	return tempo;
+}
+
+void setTempo(float _tempo)
+{
+	tempo = _tempo;
+}
+
+int getNumberOfChords()
+{
+	return numberOfChords;
+}
+
+void setNumberOfChords(int _numberOfChords)
+{
+	numberOfChords = _numberOfChords;
+}
+
+Chord* getChord(int index)
+{
+	return chords;
+}
