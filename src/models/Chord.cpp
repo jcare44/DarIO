@@ -20,3 +20,18 @@ int Chord::getNumberOfNotes()
 {
 	return numberOfNotes;
 }
+
+Note* Chord::getNote(int _i)
+{
+	return notes[_i];
+}
+
+int Chord::getMark()
+{
+	return mark;
+}
+
+void Chord::setMark(int _mark)
+{
+	mark = _mark;
+}

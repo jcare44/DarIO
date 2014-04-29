@@ -25,46 +25,46 @@ Piece::Piece()
 		// First constraint
 				// Midi average of each Chord for the first constraint
 		int avgMidiJ = 0;
-		for(i=0; i < chords[j]->numberOfNotes; i++)
+		for(i=0; i < chords[j]->getNumberOfNotes(); i++)
 		{
-		   avgMidiJ = chords[j]->notes[i]->midi;
+		   avgMidiJ = chords[j]->getNote(i)->getMidi();
 		}
 
-		avgMidiJ = avgMidiJ / chords[j]->numberOfNotes;
+		avgMidiJ = avgMidiJ / chords[j]->getNumberOfNotes();
 
 		int avgMidiJMinus = 0;
-		for(i=0; i < chords[j-1]->numberOfNotes; i++)
+		for(i=0; i < chords[j-1]->getNumberOfNotes(); i++)
 		{
-		   avgMidiJMinus = chords[j-1]->notes[i]->midi;
+		   avgMidiJMinus = chords[j-1]->getNote(i)->getMidi();
 		}
 
-		avgMidiJMinus = avgMidiJMinus / chords[j-1]->numberOfNotes;
+		avgMidiJMinus = avgMidiJMinus / chords[j-1]->getNumberOfNotes();
 
 		int avgMidiJPlus = 0;
-		for(i=0; i < chords[j+1]->numberOfNotes; i++)
+		for(i=0; i < chords[j+1]->getNumberOfNotes(); i++)
 		{
-		   avgMidiJPlus = chords[j+1]->notes[i]->midi;
+		   avgMidiJPlus = chords[j+1]->getNote(i)->getMidi();
 		}
 
-		avgMidiJPlus = avgMidiJPlus / chords[j+1]->numberOfNotes;
+		avgMidiJPlus = avgMidiJPlus / chords[j+1]->getNumberOfNotes();
 
-		chords[j]->mark += avgMidiJ / avgMidiJMinus * 50 ;
-		chords[j]->mark += avgMidiJ / avgMidiJPlus * 50 ;
+		chords[j]->setMark(chords[j]->getMark() + avgMidiJ / avgMidiJMinus * 50);
+		chords[j]->setMark(chords[j]->getMark() + avgMidiJ / avgMidiJPlus * 50);
 
 		// X constraints
 
 		// Chord evaluation
-		chords[j].mark = chords[j]->mark / NUMBER_OF_CONSTRAINTS ;
-		mark += chords[j]->mark;
+		chords[j]->setMark(chords[j]->getMark() / NUMBER_OF_CONSTRAINTS);
+		mark += chords[j]->getMark();
 
 		j++;
 
-		}
+	}
 
-		if(j = numberOfChords)
-		{
-			// And everything here again because I don't know how to handle this case
-		}
+	if(j = numberOfChords)
+	{
+		// And everything here again because I don't know how to handle this case
+	}
 
 	// Evaluation of the Piece thanks to the SUM of the chords
 	mark = mark / numberOfChords;
