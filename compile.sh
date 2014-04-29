@@ -1,3 +1,7 @@
 #!/bin/sh
 
-gcc main.c -lm
+rm -Rf src/*/*.gch
+rm -Rf src/*/*.o
+g++ src/main.cpp src/models/*
+rm -Rf src/*/*.gch
+rm -Rf src/*/*.o
