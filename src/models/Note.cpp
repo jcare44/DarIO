@@ -15,3 +15,23 @@ Note::Note()
 	float _time[TIME_LENGTH] = TIME;
 	time = _time[rand()%TIME_LENGTH];
 }
+
+int Note::getMidi()
+{
+	return midi;
+}
+
+void Note::setMidi(int _midi)
+{
+	midi = _midi;
+}
+
+float Note::getTime()
+{
+	return time;
+}
+
+void Note::setTime(float _time)
+{
+	time = _time;
+}

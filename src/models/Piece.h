@@ -19,6 +19,7 @@ class Piece
 	
 	public:
 		Piece();
+		void grading();
 };
 
 #endif //PIECE_H

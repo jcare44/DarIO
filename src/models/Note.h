@@ -16,6 +16,10 @@ class Note
 	
 	public:
 		Note();
+		int getMidi();
+		void setMidi(int _midi);
+		float getTime();
+		void setTime(float _time);
 };
 
 #endif //NOTE_H
