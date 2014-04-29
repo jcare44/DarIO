@@ -75,32 +75,42 @@ int Piece::getBar()
 	return bar;
 }
 
-void setBar(int _bar)
+void Piece::setBar(int _bar)
 {
 	bar = _bar;
 }
 
-float getTempo()
+float Piece::getTempo()
 {
 	return tempo;
 }
 
-void setTempo(float _tempo)
+void Piece::setTempo(float _tempo)
 {
 	tempo = _tempo;
 }
 
-int getNumberOfChords()
+int Piece::getNumberOfChords()
 {
 	return numberOfChords;
 }
 
-void setNumberOfChords(int _numberOfChords)
+void Piece::setNumberOfChords(int _numberOfChords)
 {
 	numberOfChords = _numberOfChords;
 }
 
-Chord* getChord(int index)
+Chord* Piece::getChord(int _i)
 {
-	return chords;
+	return chords[_i];
+}
+
+int Piece::getMark()
+{
+	return mark;
+}
+
+void Piece::setMark(int _mark)
+{
+	mark = _mark;
 }

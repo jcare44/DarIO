@@ -16,6 +16,7 @@ class Piece
 		float tempo;
 		int numberOfChords;
 		Chord* chords[CHORD];
+		int mark;
 	
 	public:
 		Piece();
@@ -26,7 +27,9 @@ class Piece
 		void setTempo(float _tempo);
 		int getNumberOfChords();
 		void setNumberOfChords(int _numberOfChords);
-		Chord* getChord(int index);
+		Chord* getChord(int _i);
+		int getMark();
+		void setMark(int _mark);
 };
 
 #endif //PIECE_H
