@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_CHORD_CONSTRAINT_H
 #define ABSTRACT_CHORD_CONSTRAINT_H
 
-#include "Chord.h"
+#include "../models/Chord.h"
 
 class AbstractChordConstraint
 {

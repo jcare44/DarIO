@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_PIECE_CONSTRAINT_H
 #define ABSTRACT_PIECE_CONSTRAINT_H
 
-#include "Piece.h"
+#include "../models/Piece.h"
 
 class AbstractPieceConstraint
 {
