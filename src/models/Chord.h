@@ -11,9 +11,11 @@ class Chord
 	private:
 		int numberOfNotes;
 		Note* notes[NOTE_MAX];
-	
+
 	public:
 		Chord();
+        int getNumberOfNotes();
+        void setNumberOfNotes(int _numberOfNotes);
 };
 
 #endif //CHORD_H
