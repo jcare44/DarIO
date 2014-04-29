@@ -1,4 +1,3 @@
-
 #include "QuinteChordConstraint.h"
 
 QuinteChordConstraint::QuinteChordConstraint()

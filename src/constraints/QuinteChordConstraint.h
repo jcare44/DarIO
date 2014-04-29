@@ -11,4 +11,4 @@ class QuinteChordConstraint : public AbstractChordConstraint
 		bool eval(Chord* _chord);
 };
 
-#endif //TIERCE_CHORD_CONSTRAINT_H
+#endif //QUINTE_CHORD_CONSTRAINT_H
