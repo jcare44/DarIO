@@ -9,6 +9,8 @@
 #define TEMPO_MAX 120
 #define CHORD 20
 
+class AbstractPieceConstraint;
+
 class Piece
 {
 	private:
@@ -17,6 +19,7 @@ class Piece
 		int numberOfChords;
 		Chord* chords[CHORD];
 		int mark;
+		static vector<AbstractPieceConstraint*> constraints;
 	
 	public:
 		Piece();
@@ -30,6 +33,8 @@ class Piece
 		Chord* getChord(int _i);
 		int getMark();
 		void setMark(int _mark);
+		template <class E>
+		static AbstractPieceConstraint* getConstraint();
 };
 
 #endif //PIECE_H

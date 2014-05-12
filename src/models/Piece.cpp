@@ -114,3 +114,17 @@ void Piece::setMark(int _mark)
 {
 	mark = _mark;
 }
+
+template <class E>
+AbstractPieceConstraint* Piece::getConstraint()
+{
+	for(int i = 0;i < constraints.size();++i)
+	{
+		if(dynamic_cast<E*>(constraints[i])!=NULL)
+		{
+			return constraints[i];
+		} 
+	}
+	
+	return NULL;
+}
