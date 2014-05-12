@@ -6,9 +6,14 @@
 
 class QuinteChordConstraint : public AbstractChordConstraint
 {
+	enum MODE{ANY,MAJOR,MINOR};
+	private:
+		MODE mode;
 	public:
 		QuinteChordConstraint();
 		bool eval(Chord* _chord);
+		void setMode(MODE _mode);
+		MODE getMode();
 };
 
 #endif //QUINTE_CHORD_CONSTRAINT_H
