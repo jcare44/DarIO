@@ -2,10 +2,10 @@
 
 SeventhChordConstraint::SeventhChordConstraint()
 {
-	
+	setCoeff(1);
 }
 
-bool SeventhChordConstraint::eval(Chord* _chord)
+int SeventhChordConstraint::eval(Chord* _chord)
 {
 	bool valid = false;
 	int nbNotes = 4;
@@ -27,5 +27,5 @@ bool SeventhChordConstraint::eval(Chord* _chord)
 		}
 	}
 	
-	return valid;
+	return valid*getCoeff();
 }

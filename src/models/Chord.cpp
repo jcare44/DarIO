@@ -1,5 +1,6 @@
 #include "Chord.h"
 #include <cstdlib>
+#include "../abstracts/AbstractChordConstraint.h"
 
 Chord::Chord()
 {
@@ -13,7 +14,11 @@ Chord::Chord()
 
 void Chord::grade()
 {
-	
+	mark = 0;
+	for(int i = 0;i < constraints.size();++i)
+	{
+		mark += constraints[i]->eval(this);
+	}
 }
 
 void Chord::setNumberOfNotes(int _numberOfNotes)

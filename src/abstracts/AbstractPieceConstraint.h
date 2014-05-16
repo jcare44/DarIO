@@ -5,8 +5,13 @@
 
 class AbstractPieceConstraint
 {
+	private:
+		int coeff;
+	
 	public:
-		virtual bool eval(Piece* _chord) = 0;
+		int getCoeff();
+		void setCoeff(int _coeff);
+		virtual int eval(Piece* _chord) = 0;
 };
 
 #endif //ABSTRACT_PIECE_CONSTRAINT_H

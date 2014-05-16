@@ -2,10 +2,10 @@
 
 QuinteChordConstraint::QuinteChordConstraint()
 {
-	
+	setCoeff(1);
 }
 
-bool QuinteChordConstraint::eval(Chord* _chord)
+int QuinteChordConstraint::eval(Chord* _chord)
 {
 	bool valid = false;
 	int nbNotes = 3;
@@ -48,7 +48,7 @@ bool QuinteChordConstraint::eval(Chord* _chord)
 		
 	}
 	
-	return valid;
+	return valid*getCoeff();
 }
 
 void QuinteChordConstraint::setMode(MODE _mode)

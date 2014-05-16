@@ -5,8 +5,13 @@
 
 class AbstractChordConstraint
 {
+	private:
+		int coeff;
+	
 	public:
-		virtual bool eval(Chord* _chord) = 0;
+		int getCoeff();
+		void setCoeff(int _coeff);
+		virtual int eval(Chord* _chord) = 0;
 };
 
 #endif //ABSTRACT_CHORD_CONSTRAINT_H

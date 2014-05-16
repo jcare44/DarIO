@@ -2,10 +2,10 @@
 
 TierceChordConstraint::TierceChordConstraint()
 {
-	
+	setCoeff(1);
 }
 
-bool TierceChordConstraint::eval(Chord* _chord)
+int TierceChordConstraint::eval(Chord* _chord)
 {
 	if(_chord->getNumberOfNotes() == 2){
 
@@ -15,9 +15,9 @@ bool TierceChordConstraint::eval(Chord* _chord)
 		
 		if((midi[1] - midi[0]) == 4)
 		{
-				return true;
+				return getCoeff();
 		}
 	}
 	
-	return false;
+	return 0;
 }
