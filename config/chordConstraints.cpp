@@ -1,5 +1,4 @@
 #include "../src/abstracts/AbstractChordConstraint.h"
-#include "../src/abstracts/AbstractPieceConstraint.h"
 #include "../src/models/Chord.h"
 #include <vector>
 

@@ -1,12 +1,10 @@
-#include "../src/abstracts/AbstractChordConstraint.h"
 #include "../src/abstracts/AbstractPieceConstraint.h"
+#include "../src/models/Piece.h"
+#include <vector>
 
 #include "../src/constraints/TierceChordConstraint.h"
 
-/*AbstractChordConstraint* chordConstraints[] = {
-	new TierceChordConstraint()
-};*/
+AbstractPieceConstraint* tt[] {
 
-/*AbstractPieceConstraint* pieceConstraints[] = {
-	
-};*/
+};
+vector<AbstractPieceConstraint*> Piece::constraints (tt,tt+sizeof(tt)/sizeof(AbstractPieceConstraint*));

@@ -23,7 +23,7 @@ class Piece
 	
 	public:
 		Piece();
-		void grading();
+		void grade();
 		int getBar();
 		void setBar(int _bar);
 		float getTempo();
