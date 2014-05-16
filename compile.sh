@@ -2,6 +2,6 @@
 
 rm -Rf src/*/*.gch
 rm -Rf src/*/*.o
-g++ src/main.cpp src/models/* src/constraints/*
+g++ -std=c++0x src/main.cpp src/models/* src/constraints/* config/*
 rm -Rf src/*/*.gch
 rm -Rf src/*/*.o
