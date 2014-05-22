@@ -20,6 +20,6 @@ class Maestro
         void setPiece(int i, Piece* _piece);
         void setNumberOfPieces(int i);
         int getNumberOfPieces();
-}
+};
 
 #endif //MAESTRO_H
