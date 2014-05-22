@@ -3,10 +3,13 @@
 #include <time.h>
 #include "../abstracts/AbstractChordConstraint.h"
 #include <iostream>
+#include <random>
+
 Chord::Chord()
 {
-	std::srand(time(NULL));
-	int max = rand()%(NOTE_MAX-NOTE_MIN)+NOTE_MIN;
+	std::random_device rdev;
+	
+	int max = rdev()%(NOTE_MAX-NOTE_MIN)+NOTE_MIN;
 	
 	for(numberOfNotes=0;numberOfNotes<max;++numberOfNotes)
 	{

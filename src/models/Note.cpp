@@ -1,23 +1,22 @@
 #include "Note.h"
 #include <cstdlib>
 #include <time.h>
+#include <random>
 
 Note::Note()
-{
-	std::srand(time(NULL));
-	float r = rand()%100;
+{ 	std::random_device rdev;
+	float r = rdev()%100;
 	if(r/100 < MIDI_PAUSE_RATIO)
 	{
 		midi = MIDI_PAUSE;
 	}
 	else
 	{
-		std::srand(time(NULL));
-		midi = rand()%(MIDI_MAX-MIDI_MIN)+MIDI_MIN;
+		midi = rdev()%(MIDI_MAX-MIDI_MIN)+MIDI_MIN;
 	}
-	std::srand(time(NULL));
+	
 	float _duration[DURATION_LENGTH] = DURATION;
-	duration = _duration[rand()%DURATION_LENGTH];
+	duration = _duration[rdev()%DURATION_LENGTH];
 }
 
 int Note::getMidi()
