@@ -2,6 +2,7 @@
 #include "../abstracts/AbstractPieceConstraint.h"
 #include <cstdlib>
 #include <cmath>
+#include <random>
 
 Piece::Piece()
 {
@@ -27,6 +28,26 @@ void Piece::grade()
 	for(i = 0;i < constraints.size();++i)
 	{
 		mark += constraints[i]->eval(this);
+	}
+}
+
+void Piece::crossing(Piece* _p)
+{
+	std::random_device rd;
+	int x = 10;
+	int i;
+	Chord* tmp;
+	
+	if(rd()%100 < CROSSING_RATE)
+	{
+		x = rd()%20+1;
+	}
+	
+	for(i=0;i<x;++i)
+	{
+		tmp = chords[i];
+		chords[i] = _p->getChord(i);
+		_p->setChord(i,tmp);
 	}
 }
 
@@ -63,6 +84,14 @@ void Piece::setNumberOfChords(int _numberOfChords)
 Chord* Piece::getChord(int _i)
 {
 	return chords[_i];
+}
+
+void Piece::setChord(int _i, Chord* _c)
+{
+	if(_i < numberOfChords)
+	{
+		chords[_i] = _c;
+	}
 }
 
 int Piece::getMark()

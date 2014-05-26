@@ -8,6 +8,7 @@
 #define TEMPO_MIN 119
 #define TEMPO_MAX 120
 #define CHORD 20
+#define CROSSING_RATE 10 //%
 
 class AbstractPieceConstraint;
 
@@ -31,10 +32,12 @@ class Piece
 		int getNumberOfChords();
 		void setNumberOfChords(int _numberOfChords);
 		Chord* getChord(int _i);
+		void setChord(int _i, Chord* _c);
 		int getMark();
 		void setMark(int _mark);
 		template <class E>
 		static AbstractPieceConstraint* getConstraint();
+		void crossing(Piece* p);
 };
 
 #endif //PIECE_H
