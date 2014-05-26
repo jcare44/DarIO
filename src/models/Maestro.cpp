@@ -1,5 +1,6 @@
 #include "Maestro.h"
 #include <cstdlib>
+#include <random>
 
 Maestro::Maestro()
 {
@@ -20,13 +21,14 @@ Maestro::Maestro(Piece** _tabPiece, int _numberOfPieces)
 
 void Maestro::biasedWheel()
 {
+	std::random_device rd;
     int i=0;
     int j=0;
     Piece** tabTemp = (Piece**)malloc(sizeof(int)*numberOfPieces/2);
     while(j<(numberOfPieces/2))
     {
-        i = rand() % (numberOfPieces-1);
-        if((rand()%100) < tabPiece[i]->getMark())
+        i = rd() % (numberOfPieces-1);
+        if((rd()%100) < tabPiece[i]->getMark())
         {
             tabTemp[j] = tabPiece[i];
             tabPiece[i]->setMark(0);
