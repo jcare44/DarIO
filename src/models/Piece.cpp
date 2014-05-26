@@ -6,8 +6,10 @@
 
 Piece::Piece()
 {
-	bar = rand()%(BAR_MAX-BAR_MIN)+BAR_MIN;
-	tempo = rand()%(TEMPO_MAX-TEMPO_MIN)+TEMPO_MIN;
+	std::random_device rdev;
+	
+	bar = rdev()%(BAR_MAX-BAR_MIN)+BAR_MIN;
+	tempo = rdev()%(TEMPO_MAX-TEMPO_MIN)+TEMPO_MIN;
 	
 	for(numberOfChords=0;numberOfChords<CHORD;++numberOfChords)
 	{
