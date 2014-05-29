@@ -1,19 +1,11 @@
 #include <cmath>
 #include <iostream>
 #include <cstdlib>
-#include <time.h>
-#include <string>
-#include <sstream>
-#include "osc/OscOutboundPacketStream.h"
-#include "ip/UdpSocket.h"
+#include <pthread.h>
 
 #include "constraints/QuinteChordConstraint.h"
 #include "models/Maestro.h"
-
-#define ADDRESS "127.0.0.1"
-#define PORT 8000
-
-#define OUTPUT_BUFFER_SIZE 1024
+#include "OscTransmitter.h"
 
 using namespace std;
 
@@ -23,57 +15,12 @@ int main(int argc, char *argv[])
 	QuinteCon->setMode(QuinteChordConstraint::MODE::MAJOR);
 	Maestro* m = new Maestro(256);
 
-	char address[] = "192.168.1.22";
-	int port = 8000;
-	string input;
-	cout << "Address IP ? [hit enter for default : 192.168.1.22]" << endl;
-	getline(cin, input);
-	if(input.length()>0){
-		 stringstream(input)>>address;
-	}
-	cout << "address = " << address << endl;
-	cout << "Port ? [hit enter for default : 8000]" << endl;
-	getline(cin,input);
-	if(input.length()>0){
-		 stringstream(input)>>port;
-	}
-	cout << "port = " << port << endl;
+	OscTransmitter* transmitter = new OscTransmitter();
+	transmitter->setPiece(m->process());
 	
-	UdpTransmitSocket transmitSocket( IpEndpointName( address, port ) );
-	char buffer[OUTPUT_BUFFER_SIZE];
-    osc::OutboundPacketStream pack( buffer, OUTPUT_BUFFER_SIZE ); 
+	pthread_create(transmitter->getThread(), NULL,OscTransmitter::threadCreate,(void*)transmitter);
 	
-	srand(time(NULL));
-	Piece* p = m->process();
-	cout <<"Numbre of Chords : "<< p->getNumberOfChords() << endl;
-	Chord* c = p->getChord(1);
-	int nbNotes = c->getNumberOfNotes();
-	cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
-	int i;
-	
-	pack << osc::BeginBundleImmediate
-	<< osc::BeginMessage( "/pitch" );
-		for(i = 0;i<nbNotes;i++){
-			cout <<"note "<<i<<"---------------"<<endl;
-			cout <<"midi : "<<c->getNote(i)->getMidi() << endl;
-			cout <<"time : "<<c->getNote(i)->getDuration() << endl;
-			pack << c->getNote(i)->getMidi();	
-		}
-	pack << osc::EndMessage;
-	pack << osc::BeginMessage("/duration");
-		for(i = 0;i<nbNotes;i++){
-			pack << c->getNote(i)->getDuration()*1000;	
-		}
-	pack << osc::EndMessage;
-	pack << osc::EndBundle;
-	
-
-     //      << 65 << 23 << osc::EndMessage
-     // << osc::BeginMessage( "/test2" ) 
-     //    << 5 << 24 << (float)10.8 << "world" << osc::EndMessage
-     //<< osc::EndBundle;
-    
-    transmitSocket.Send( pack.Data(), pack.Size() );
+	pthread_join(*transmitter->getThread(),NULL);
 		
 	return 0;
 }
