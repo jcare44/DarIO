@@ -13,8 +13,11 @@ class Maestro
 
     public:
         Maestro();
+        Maestro(int _numberOfPieces);
         Maestro(Piece** _tabPiece, int _numberOfPieces);
-        void biasedWheel();
+        
+        Piece* process();
+        void biasedWheel(int _bestMark);
         void addPiece(Piece* _piece);
         Piece* getPiece(int i);
         void setPiece(int i, Piece* _piece);

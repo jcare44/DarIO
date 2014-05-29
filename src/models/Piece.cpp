@@ -1,6 +1,7 @@
 #include "Piece.h"
 #include "../abstracts/AbstractPieceConstraint.h"
 #include <cstdlib>
+#include <iostream>
 #include <cmath>
 #include <random>
 
@@ -23,6 +24,7 @@ void Piece::grade()
 	mark = 0;
 	for(i = 0;i<numberOfChords;++i)
 	{
+		chords[i]->grade();
 		mark += chords[i]->getMark();
 	}
 	mark = floor(mark/numberOfChords);
@@ -36,13 +38,13 @@ void Piece::grade()
 void Piece::crossing(Piece* _p)
 {
 	std::random_device rd;
-	int x = 10;
+	int x = floor(CHORD/2);
 	int i;
 	Chord* tmp;
 	
 	if(rd()%100 < CROSSING_RATE)
 	{
-		x = rd()%20+1;
+		x = rd()%CHORD+1;
 	}
 	
 	for(i=0;i<x;++i)
