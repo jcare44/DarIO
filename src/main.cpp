@@ -17,10 +17,19 @@ int main(int argc, char *argv[])
 
 	OscTransmitter* transmitter = new OscTransmitter();
 	transmitter->setPiece(m->process());
+	Piece* tmp;
 	
-	pthread_create(transmitter->getThread(), NULL,OscTransmitter::threadCreate,(void*)transmitter);
-	
-	pthread_join(*transmitter->getThread(),NULL);
+	while(1)
+	{
+		pthread_create(transmitter->getThread(), NULL,OscTransmitter::threadCreate,(void*)transmitter);
+		
+		m = new Maestro(256);
+		tmp = m->process();
+		
+		pthread_join(*transmitter->getThread(),NULL);
+		
+		transmitter->setPiece(tmp);
+	}
 		
 	return 0;
 }

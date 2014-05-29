@@ -66,6 +66,17 @@ void Piece::crossing(Piece* _p)
 	}
 }
 
+/**
+ * Get Base duration 
+ * Multiply with note::duration for real note duration
+ * 
+ * @return	Base duration in milli second
+ */
+int Piece::getBaseDuration()
+{
+	return floor(60000/tempo);
+}
+
 int Piece::getBar()
 {
 	return bar;

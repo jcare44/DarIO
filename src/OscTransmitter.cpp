@@ -28,39 +28,54 @@ OscTransmitter::OscTransmitter()
 
 void OscTransmitter::thread()
 {
-	UdpTransmitSocket transmitSocket( IpEndpointName( ipAddress, port ) );
+	UdpTransmitSocket transmitSocket(IpEndpointName(ipAddress, port));
 	char buffer[OUTPUT_BUFFER_SIZE];
-    osc::OutboundPacketStream pack( buffer, OUTPUT_BUFFER_SIZE ); 
+	osc::OutboundPacketStream pack(buffer, OUTPUT_BUFFER_SIZE);
+    
 	
 	cout <<"Numbre of Chords : "<< piece->getNumberOfChords() << endl;
-	Chord* c = piece->getChord(1);
-	int nbNotes = c->getNumberOfNotes();
-	cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
-	int i;
-	
-	pack << osc::BeginBundleImmediate
-	<< osc::BeginMessage( "/pitch" );
+	Chord* c;
+	int sleepTime;
+	for(int j=0;j<piece->getNumberOfChords();++j)
+	{
+		c = piece->getChord(j);
+		sleepTime = 0;
+		int nbNotes = c->getNumberOfNotes();
+		cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
+		int i;
+		
+		pack.Clear();
+		
+		pack << osc::BeginBundleImmediate
+			<< osc::BeginMessage( "/pitch" );
 		for(i = 0;i<nbNotes;i++){
 			cout <<"note "<<i<<"---------------"<<endl;
 			cout <<"midi : "<<c->getNote(i)->getMidi() << endl;
 			cout <<"time : "<<c->getNote(i)->getDuration() << endl;
 			pack << c->getNote(i)->getMidi();	
 		}
-	pack << osc::EndMessage;
-	pack << osc::BeginMessage("/duration");
+		pack << osc::EndMessage;
+		pack << osc::BeginMessage("/duration");
 		for(i = 0;i<nbNotes;i++){
-			pack << c->getNote(i)->getDuration()*1000;	
+			pack << c->getNote(i)->getDuration()*piece->getBaseDuration();
+			if(sleepTime < c->getNote(i)->getDuration()*piece->getBaseDuration()*1000)
+			{
+				sleepTime = c->getNote(i)->getDuration()*piece->getBaseDuration()*1000;
+			}
 		}
-	pack << osc::EndMessage;
-	pack << osc::EndBundle;
-	
+		pack << osc::EndMessage;
+		pack << osc::EndBundle;
+		
+		cout << "transmit" << endl;
+		transmitSocket.Send( pack.Data(), pack.Size() );
+		usleep(sleepTime);
+	}
 
+	pthread_exit(NULL);
      //      << 65 << 23 << osc::EndMessage
      // << osc::BeginMessage( "/test2" ) 
      //    << 5 << 24 << (float)10.8 << "world" << osc::EndMessage
      //<< osc::EndBundle;
-    
-    transmitSocket.Send( pack.Data(), pack.Size() );
 }
 
 void OscTransmitter::setPiece(Piece* _piece)
