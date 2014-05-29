@@ -84,7 +84,7 @@ void OscTransmitter::thread()
 		for(map<float,int>::iterator it=durations.begin(); it!=durations.end(); ++it)
 		{
             tmp = it->second;
-            if(tmp >= c->getNumberOfNotes()*3/4)
+            if(tmp >= c->getNumberOfNotes()*2/3)
             {
 				usleep(it->first*piece->getBaseDuration()*1000);
 				break;
