@@ -6,8 +6,8 @@
 
 #define BAR_MIN 99
 #define BAR_MAX 100
-#define TEMPO_MIN 119
-#define TEMPO_MAX 120
+#define TEMPO_MIN 120
+#define TEMPO_MAX 121
 #define CHORD 60
 #define CROSSING_RATE 10 //%
 

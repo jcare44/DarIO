@@ -18,7 +18,7 @@ Maestro::Maestro(int _numberOfPieces)
     
     for(int i=0;i<numberOfPieces;++i)
     {
-		//cout << "Iterate Piece " << i << endl;
+		cout << "Iterate Piece " << i << endl;
 		tabPiece[i] = new Piece();
 	}
 }
@@ -39,10 +39,10 @@ Piece* Maestro::process()
 {
 	int i; 
 	float bestMark;
-	//cout << "Init\n";
+	cout << "Init\n";
 	while(numberOfPieces > 2)
 	{
-		//cout << "iterate " << numberOfPieces << endl;
+		cout << "iterate " << numberOfPieces << endl;
 		bestMark = 0;
 		for(i=0;i<numberOfPieces;++i)
 		{
@@ -58,7 +58,7 @@ Piece* Maestro::process()
 		}
 		
 		biasedWheel(floor(bestMark));
-		//cout << "end iterate\n";
+		cout << "end iterate\n";
 	}
 	
 	return best;

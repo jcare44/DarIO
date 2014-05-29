@@ -49,7 +49,7 @@ void OscTransmitter::thread()
 		c = piece->getChord(j);
 		
 		int nbNotes = c->getNumberOfNotes();
-		cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
+		cout <<"Numbre of notes of Chord " << j << " : "<< nbNotes << endl;
 		int i;
 		
 		pack.Clear();
@@ -85,7 +85,7 @@ void OscTransmitter::thread()
 		for(map<float,int>::iterator it=durations.begin(); it!=durations.end(); ++it)
 		{
             tmp = it->second;
-            if(tmp >= c->getNumberOfNotes()*2/3)
+            if(tmp >= c->getNumberOfNotes()*1/2)
             {
 				usleep(it->first*piece->getBaseDuration()*1000);
 				break;
