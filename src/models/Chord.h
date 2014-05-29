@@ -1,6 +1,7 @@
 #ifndef CHORD_H
 #define CHORD_H
 
+#include <cstdlib>
 #include <vector>
 
 using namespace std;
@@ -34,5 +35,19 @@ class Chord
 		template <class E>
 		static AbstractChordConstraint* getConstraint();
 };
+
+template <class E>
+AbstractChordConstraint* Chord::getConstraint()
+{
+	for(int i = 0;i < constraints.size();++i)
+	{
+		if(dynamic_cast<E*>(constraints[i])!=NULL)
+		{
+			return constraints[i];
+		}
+	}
+
+	return NULL;
+}
 
 #endif //CHORD_H

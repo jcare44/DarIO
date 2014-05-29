@@ -133,16 +133,3 @@ Piece* Piece::mutate(Piece* _piece)
 
     return _piece;
 }
-
-template <class E>
-AbstractPieceConstraint* Piece::getConstraint()
-{
-	for(int i = 0;i < constraints.size();++i)
-	{
-		if(dynamic_cast<E*>(constraints[i])!=NULL)
-		{
-			return constraints[i];
-		}
-	}
-	return NULL;
-}

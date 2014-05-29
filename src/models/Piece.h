@@ -1,6 +1,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <cstdlib>
 #include "Chord.h"
 
 #define BAR_MIN 99
@@ -42,5 +43,18 @@ class Piece
 		static AbstractPieceConstraint* getConstraint();
 		void crossing(Piece* p);
 };
+
+template <class E>
+AbstractPieceConstraint* Piece::getConstraint()
+{
+	for(int i = 0;i < constraints.size();++i)
+	{
+		if(dynamic_cast<E*>(constraints[i])!=NULL)
+		{
+			return constraints[i];
+		}
+	}
+	return NULL;
+}
 
 #endif //PIECE_H

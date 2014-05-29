@@ -7,6 +7,7 @@
 #include "osc/OscOutboundPacketStream.h"
 #include "ip/UdpSocket.h"
 
+#include "constraints/QuinteChordConstraint.h"
 #include "models/Maestro.h"
 
 #define ADDRESS "127.0.0.1"
@@ -18,6 +19,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	QuinteChordConstraint* QuinteCon = (QuinteChordConstraint*)Chord::getConstraint<QuinteChordConstraint>();
+	QuinteCon->setMode(QuinteChordConstraint::MODE::MAJOR);
 	Maestro* m = new Maestro(256);
 
 	char address[] = "192.168.1.22";
