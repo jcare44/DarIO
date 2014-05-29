@@ -25,9 +25,11 @@ class Chord
 		int getNumberOfNotes();
 		void setNumberOfNotes(int _numberOfNotes);
 		Note* getNote(int _i);
+		void setNote(int _i, Note* _note);
 		int getMark();
 		void setMark(int _mark);
 		void grade();
+		Chord* mutate(Chord* _chord);
 		template <class E>
 		static AbstractChordConstraint* getConstraint();
 };
