@@ -10,6 +10,7 @@
 #define CHORD 20
 #define CROSSING_RATE 10 //%
 
+
 class AbstractPieceConstraint;
 
 class Piece
@@ -21,7 +22,7 @@ class Piece
 		Chord* chords[CHORD];
 		int mark;
 		static vector<AbstractPieceConstraint*> constraints;
-	
+
 	public:
 		Piece();
 		void grade();
@@ -35,6 +36,7 @@ class Piece
 		void setChord(int _i, Chord* _c);
 		int getMark();
 		void setMark(int _mark);
+		Piece* mutate(Piece* _piece);
 		template <class E>
 		static AbstractPieceConstraint* getConstraint();
 		void crossing(Piece* p);

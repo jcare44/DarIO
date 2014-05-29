@@ -8,10 +8,10 @@
 Piece::Piece()
 {
 	std::random_device rdev;
-	
+
 	bar = rdev()%(BAR_MAX-BAR_MIN)+BAR_MIN;
 	tempo = rdev()%(TEMPO_MAX-TEMPO_MIN)+TEMPO_MIN;
-	
+
 	for(numberOfChords=0;numberOfChords<CHORD;++numberOfChords)
 	{
 		chords[numberOfChords] = new Chord();
@@ -28,7 +28,7 @@ void Piece::grade()
 		mark += chords[i]->getMark();
 	}
 	mark = floor(mark/numberOfChords);
-	
+
 	for(i = 0;i < constraints.size();++i)
 	{
 		mark += constraints[i]->eval(this);
@@ -41,12 +41,12 @@ void Piece::crossing(Piece* _p)
 	int x = floor(CHORD/2);
 	int i;
 	Chord* tmp;
-	
+
 	if(rd()%100 < CROSSING_RATE)
 	{
 		x = rd()%CHORD+1;
 	}
-	
+
 	for(i=0;i<x;++i)
 	{
 		tmp = chords[i];
@@ -108,6 +108,21 @@ void Piece::setMark(int _mark)
 	mark = _mark;
 }
 
+Piece* Piece::mutate(Piece* _piece)
+{
+
+    for(int i =0; i<numberOfChords; ++i)
+    {
+        std::random_device rd;
+        if (rd()%100 < MUTATE_RATE)
+        {
+            _piece->setChord(i, _piece->getChord(i)->mutate(_piece->getChord(i)));
+        }
+    }
+
+    return _piece;
+}
+
 template <class E>
 AbstractPieceConstraint* Piece::getConstraint()
 {
@@ -116,8 +131,7 @@ AbstractPieceConstraint* Piece::getConstraint()
 		if(dynamic_cast<E*>(constraints[i])!=NULL)
 		{
 			return constraints[i];
-		} 
+		}
 	}
-	
 	return NULL;
 }

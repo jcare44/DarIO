@@ -7,19 +7,21 @@
 #define MIDI_MAX 95
 #define DURATION {0.25,0.5,1,2,4} //De la double croche à la ronde
 #define DURATION_LENGTH 5
+#define MUTATE_RATE 10 //%
 
 class Note
 {
 	private:
 		int midi;
 		float duration;
-	
+
 	public:
 		Note();
 		int getMidi();
 		void setMidi(int _midi);
 		float getDuration();
 		void setDuration(float _duration);
+		Note* mutate(Note* _note);
 };
 
 #endif //NOTE_H
