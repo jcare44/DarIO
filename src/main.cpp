@@ -11,8 +11,11 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	//change parameters the Quinte chord constraint
 	QuinteChordConstraint* QuinteCon = (QuinteChordConstraint*)Chord::getConstraint<QuinteChordConstraint>();
 	QuinteCon->setMode(QuinteChordConstraint::MODE::MAJOR);
+	QuinteCon->setCoeff(5);
+	
 	Maestro* m = new Maestro(256);
 
 	OscTransmitter* transmitter = new OscTransmitter();

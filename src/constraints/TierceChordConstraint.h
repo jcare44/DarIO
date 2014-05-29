@@ -8,7 +8,7 @@ class TierceChordConstraint : public AbstractChordConstraint
 {
 	public:
 		TierceChordConstraint();
-		int eval(Chord* _chord);
+		float eval(Chord* _chord);
 };
 
 #endif //TIERCE_CHORD_CONSTRAINT_H

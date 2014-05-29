@@ -18,7 +18,7 @@ class Chord
 	private:
 		int numberOfNotes;
 		Note* notes[NOTE_MAX];
-		int mark;
+		float mark;
 		static vector<AbstractChordConstraint*> constraints;
 
 	public:
@@ -28,8 +28,8 @@ class Chord
 		void setNumberOfNotes(int _numberOfNotes);
 		Note* getNote(int _i);
 		void setNote(int _i, Note* _note);
-		int getMark();
-		void setMark(int _mark);
+		float getMark();
+		void setMark(float _mark);
 		void grade();
 		Chord* mutate(Chord* _chord);
 		template <class E>

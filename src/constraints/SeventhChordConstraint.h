@@ -8,7 +8,7 @@ class SeventhChordConstraint : public AbstractChordConstraint
 {
 	public:
 		SeventhChordConstraint();
-		int eval(Chord* _chord);
+		float eval(Chord* _chord);
 };
 
 #endif //SEVENTH_CHORD_CONSTRAINT_H

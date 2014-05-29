@@ -109,12 +109,12 @@ void Piece::setChord(int _i, Chord* _c)
 	}
 }
 
-int Piece::getMark()
+float Piece::getMark()
 {
 	return mark;
 }
 
-void Piece::setMark(int _mark)
+void Piece::setMark(float _mark)
 {
 	mark = _mark;
 }

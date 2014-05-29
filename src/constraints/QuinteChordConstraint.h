@@ -13,7 +13,7 @@ class QuinteChordConstraint : public AbstractChordConstraint
 		MODE mode;
 	public:	
 		QuinteChordConstraint();
-		int eval(Chord* _chord);
+		float eval(Chord* _chord);
 		void setMode(MODE _mode);
 		MODE getMode();
 };

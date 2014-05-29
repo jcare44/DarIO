@@ -5,7 +5,7 @@ QuinteChordConstraint::QuinteChordConstraint()
 	setCoeff(1);
 }
 
-int QuinteChordConstraint::eval(Chord* _chord)
+float QuinteChordConstraint::eval(Chord* _chord)
 {
 	bool valid = false;
 	int nbNotes = 3;

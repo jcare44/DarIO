@@ -5,7 +5,7 @@ TierceChordConstraint::TierceChordConstraint()
 	setCoeff(1);
 }
 
-int TierceChordConstraint::eval(Chord* _chord)
+float TierceChordConstraint::eval(Chord* _chord)
 {
 	if(_chord->getNumberOfNotes() == 2){
 

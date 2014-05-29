@@ -51,12 +51,12 @@ Note* Chord::getNote(int _i)
 	return notes[_i];
 }
 
-int Chord::getMark()
+float Chord::getMark()
 {
 	return mark;
 }
 
-void Chord::setMark(int _mark)
+void Chord::setMark(float _mark)
 {
 	mark = _mark;
 }
