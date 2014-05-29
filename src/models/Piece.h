@@ -25,6 +25,7 @@ class Piece
 
 	public:
 		Piece();
+		Piece(Piece* _p);
 		void grade();
 		int getBar();
 		void setBar(int _bar);

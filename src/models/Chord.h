@@ -22,6 +22,7 @@ class Chord
 
 	public:
 		Chord();
+		Chord(Chord* _c);
 		int getNumberOfNotes();
 		void setNumberOfNotes(int _numberOfNotes);
 		Note* getNote(int _i);

@@ -18,8 +18,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	Maestro* m = new Maestro(32);
-	m->process();
+	Maestro* m = new Maestro(256);
 
 	char address[] = "192.168.1.22";
 	int port = 8000;
@@ -42,7 +41,7 @@ int main(int argc, char *argv[])
     osc::OutboundPacketStream pack( buffer, OUTPUT_BUFFER_SIZE ); 
 	
 	srand(time(NULL));
-	Piece* p = new Piece();
+	Piece* p = m->process();
 	cout <<"Numbre of Chords : "<< p->getNumberOfChords() << endl;
 	Chord* c = p->getChord(1);
 	int nbNotes = c->getNumberOfNotes();

@@ -10,6 +10,7 @@ class Maestro
     private:
         Piece** tabPiece;
         int numberOfPieces;
+        Piece* best;
 
     public:
         Maestro();

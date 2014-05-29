@@ -18,6 +18,17 @@ Piece::Piece()
 	}
 }
 
+Piece::Piece(Piece* _p)
+{
+	bar = _p->getBar();
+	tempo = _p->getTempo();
+	
+	for(numberOfChords=0;numberOfChords<_p->getNumberOfChords();++numberOfChords)
+	{
+		chords[numberOfChords] = new Chord(_p->getChord(numberOfChords));
+	}
+}
+
 void Piece::grade()
 {
 	int i;

@@ -17,6 +17,7 @@ class Note
 
 	public:
 		Note();
+		Note(Note* _n);
 		int getMidi();
 		void setMidi(int _midi);
 		float getDuration();

@@ -7,12 +7,14 @@ Maestro::Maestro()
 {
     numberOfPieces = 0;
     tabPiece = (Piece**)malloc(sizeof(Piece*)*numberOfPieces);
+    best = NULL;
 }
 
 Maestro::Maestro(int _numberOfPieces)
 {
     numberOfPieces = _numberOfPieces;
     tabPiece = (Piece**)malloc(sizeof(Piece*)*numberOfPieces);
+    best = NULL;
     
     for(int i=0;i<numberOfPieces;++i)
     {
@@ -24,6 +26,7 @@ Maestro::Maestro(int _numberOfPieces)
 Maestro::Maestro(Piece** _tabPiece, int _numberOfPieces)
 {
     tabPiece = (Piece**)malloc(sizeof(int)*_numberOfPieces);
+    best = NULL;
     for(int i=0;i<_numberOfPieces;++i)
     {
         tabPiece[i] = _tabPiece[i];
@@ -42,12 +45,14 @@ Piece* Maestro::process()
 		bestMark = 0;
 		for(i=0;i<numberOfPieces;++i)
 		{
-			cout << "test1\n";
 			tabPiece[i]->grade();
-			cout << "test2\n";
 			if(bestMark < tabPiece[i]->getMark())
 			{
 				bestMark = tabPiece[i]->getMark();
+			}
+			if(best == NULL || best->getMark() < tabPiece[i]->getMark())
+			{
+				best = new Piece(tabPiece[i]);
 			}
 		}
 		
@@ -55,7 +60,7 @@ Piece* Maestro::process()
 		cout << "end iterate\n";
 	}
 	
-	return tabPiece[0];
+	return best;
 }
 
 void Maestro::biasedWheel(int _bestMark)

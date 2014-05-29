@@ -19,6 +19,12 @@ Note::Note()
 	duration = _duration[rdev()%DURATION_LENGTH];
 }
 
+Note::Note(Note* _n)
+{
+	midi = _n->getMidi();
+	duration = _n->getDuration();
+}
+
 int Note::getMidi()
 {
 	return midi;

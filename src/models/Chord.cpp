@@ -17,6 +17,16 @@ Chord::Chord()
 	}
 }
 
+Chord::Chord(Chord* _c)
+{
+	mark = _c->getMark();
+	
+	for(numberOfNotes=0;numberOfNotes<_c->getNumberOfNotes();++numberOfNotes)
+	{
+		notes[numberOfNotes] = new Note(_c->getNote(numberOfNotes));
+	}
+}
+
 void Chord::grade()
 {
 	mark = 0;
