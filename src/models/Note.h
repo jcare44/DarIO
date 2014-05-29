@@ -22,7 +22,7 @@ class Note
 		void setMidi(int _midi);
 		float getDuration();
 		void setDuration(float _duration);
-		Note* mutate(Note* _note);
+		void mutate();
 };
 
 #endif //NOTE_H

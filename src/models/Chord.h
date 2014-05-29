@@ -31,7 +31,7 @@ class Chord
 		int getMark();
 		void setMark(int _mark);
 		void grade();
-		Chord* mutate(Chord* _chord);
+		void mutate();
 		template <class E>
 		static AbstractChordConstraint* getConstraint();
 };

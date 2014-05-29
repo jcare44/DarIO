@@ -38,7 +38,7 @@ class Piece
 		void setChord(int _i, Chord* _c);
 		int getMark();
 		void setMark(int _mark);
-		Piece* mutate(Piece* _piece);
+		void mutate();
 		template <class E>
 		static AbstractPieceConstraint* getConstraint();
 		void crossing(Piece* p);

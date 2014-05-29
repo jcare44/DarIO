@@ -77,6 +77,13 @@ void Maestro::biasedWheel(int _bestMark)
         {
             tabTemp[j] = tabPiece[i];
             tabPiece[i]->setMark(0);
+            
+            if(j%2 == 1)
+            {
+				tabTemp[j]->crossing(tabTemp[j-1]);
+			}
+			tabTemp[j]->mutate();
+            
             ++j;
         }
     }

@@ -130,7 +130,7 @@ void Piece::setMark(int _mark)
 	mark = _mark;
 }
 
-Piece* Piece::mutate(Piece* _piece)
+void Piece::mutate()
 {
 
     for(int i =0; i<numberOfChords; ++i)
@@ -138,9 +138,7 @@ Piece* Piece::mutate(Piece* _piece)
         std::random_device rd;
         if (rd()%100 < MUTATE_RATE)
         {
-            _piece->setChord(i, _piece->getChord(i)->mutate(_piece->getChord(i)));
+            getChord(i)->mutate();
         }
     }
-
-    return _piece;
 }
