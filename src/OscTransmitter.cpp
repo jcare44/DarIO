@@ -2,6 +2,7 @@
 #include <iostream>
 #include <pthread.h>
 #include <string>
+#include <map>
 #include <sstream>
 #include "osc/OscOutboundPacketStream.h"
 #include "ip/UdpSocket.h"
@@ -34,12 +35,18 @@ void OscTransmitter::thread()
     
 	
 	cout <<"Numbre of Chords : "<< piece->getNumberOfChords() << endl;
+	
 	Chord* c;
-	int sleepTime;
+	map<float,int> durations;
+	int tmp;
+	
 	for(int j=0;j<piece->getNumberOfChords();++j)
 	{
+		tmp = 0;
+		durations.clear();
+		
 		c = piece->getChord(j);
-		sleepTime = 0;
+		
 		int nbNotes = c->getNumberOfNotes();
 		cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
 		int i;
@@ -58,9 +65,14 @@ void OscTransmitter::thread()
 		pack << osc::BeginMessage("/duration");
 		for(i = 0;i<nbNotes;i++){
 			pack << c->getNote(i)->getDuration()*piece->getBaseDuration();
-			if(sleepTime < c->getNote(i)->getDuration()*piece->getBaseDuration()*1000)
+			
+			if(!durations[c->getNote(i)->getDuration()])
 			{
-				sleepTime = c->getNote(i)->getDuration()*piece->getBaseDuration()*1000;
+				durations[c->getNote(i)->getDuration()] = 1;
+			}
+			else
+			{
+				++durations[c->getNote(i)->getDuration()];
 			}
 		}
 		pack << osc::EndMessage;
@@ -68,14 +80,19 @@ void OscTransmitter::thread()
 		
 		cout << "transmit" << endl;
 		transmitSocket.Send( pack.Data(), pack.Size() );
-		usleep(sleepTime);
+		
+		for(map<float,int>::iterator it=durations.begin(); it!=durations.end(); ++it)
+		{
+            tmp = it->second;
+            if(tmp >= c->getNumberOfNotes()*3/4)
+            {
+				usleep(it->first*piece->getBaseDuration()*1000);
+				break;
+			}
+		}
 	}
 
 	pthread_exit(NULL);
-     //      << 65 << 23 << osc::EndMessage
-     // << osc::BeginMessage( "/test2" ) 
-     //    << 5 << 24 << (float)10.8 << "world" << osc::EndMessage
-     //<< osc::EndBundle;
 }
 
 void OscTransmitter::setPiece(Piece* _piece)
