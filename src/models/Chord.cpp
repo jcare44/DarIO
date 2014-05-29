@@ -69,15 +69,14 @@ void Chord::setNote(int _i, Note* _note)
 	}
 }
 
-Chord* Chord::mutate(Chord* _chord)
+void Chord::mutate()
 {
     for(int i =0; i<numberOfNotes; ++i)
     {
         std::random_device rd;
         if (rd()%100 < MUTATE_RATE)
         {
-            _chord->setNote(i, _chord->getNote(i)->mutate(_chord->getNote(i)));
+            getNote(i)->mutate();
         }
     }
-    return _chord;
 }

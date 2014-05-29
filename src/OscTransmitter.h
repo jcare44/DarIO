@@ -3,7 +3,7 @@
 
 #include "models/Piece.h"
 
-#define OUTPUT_BUFFER_SIZE 1024
+#define OUTPUT_BUFFER_SIZE 2048
 
 class OscTransmitter
 {

@@ -66,6 +66,17 @@ void Piece::crossing(Piece* _p)
 	}
 }
 
+/**
+ * Get Base duration 
+ * Multiply with note::duration for real note duration
+ * 
+ * @return	Base duration in milli second
+ */
+int Piece::getBaseDuration()
+{
+	return floor(60000/tempo);
+}
+
 int Piece::getBar()
 {
 	return bar;
@@ -119,7 +130,7 @@ void Piece::setMark(float _mark)
 	mark = _mark;
 }
 
-Piece* Piece::mutate(Piece* _piece)
+void Piece::mutate()
 {
 
     for(int i =0; i<numberOfChords; ++i)
@@ -127,9 +138,7 @@ Piece* Piece::mutate(Piece* _piece)
         std::random_device rd;
         if (rd()%100 < MUTATE_RATE)
         {
-            _piece->setChord(i, _piece->getChord(i)->mutate(_piece->getChord(i)));
+            getChord(i)->mutate();
         }
     }
-
-    return _piece;
 }

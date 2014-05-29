@@ -18,12 +18,12 @@ float FlowPieceConstraint::eval(Piece* _piece)
 		c1 = _piece->getChord(i);
 		c2 = _piece->getChord(i-1);
 		diffMidi = std::abs(c1->getNote(0) - c2->getNote(0));
-		cout <<"diff midi : " << diffMidi << endl;
+		//cout <<"diff midi : " << diffMidi << endl;
 		if(diffMidi < 12)
 		{
 			++counter;
 		}
 	}
 	rate = ((float)counter / _piece->getNumberOfChords())*10;
-	cout << "rate " << rate << endl;
+	//cout << "rate " << rate << endl;
 }

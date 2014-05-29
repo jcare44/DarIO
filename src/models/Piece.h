@@ -8,7 +8,7 @@
 #define BAR_MAX 100
 #define TEMPO_MIN 119
 #define TEMPO_MAX 120
-#define CHORD 20
+#define CHORD 60
 #define CROSSING_RATE 10 //%
 
 
@@ -38,10 +38,11 @@ class Piece
 		void setChord(int _i, Chord* _c);
 		float getMark();
 		void setMark(float _mark);
-		Piece* mutate(Piece* _piece);
+		void mutate();
 		template <class E>
 		static AbstractPieceConstraint* getConstraint();
 		void crossing(Piece* p);
+		int getBaseDuration();
 };
 
 template <class E>

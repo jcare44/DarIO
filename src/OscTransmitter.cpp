@@ -2,9 +2,11 @@
 #include <iostream>
 #include <pthread.h>
 #include <string>
+#include <map>
 #include <sstream>
 #include "osc/OscOutboundPacketStream.h"
 #include "ip/UdpSocket.h"
+#include <unistd.h>
 
 OscTransmitter::OscTransmitter()
 {
@@ -28,39 +30,70 @@ OscTransmitter::OscTransmitter()
 
 void OscTransmitter::thread()
 {
-	UdpTransmitSocket transmitSocket( IpEndpointName( ipAddress, port ) );
+	UdpTransmitSocket transmitSocket(IpEndpointName(ipAddress, port));
 	char buffer[OUTPUT_BUFFER_SIZE];
-    osc::OutboundPacketStream pack( buffer, OUTPUT_BUFFER_SIZE ); 
+	osc::OutboundPacketStream pack(buffer, OUTPUT_BUFFER_SIZE);
+    
 	
 	cout <<"Numbre of Chords : "<< piece->getNumberOfChords() << endl;
-	Chord* c = piece->getChord(1);
-	int nbNotes = c->getNumberOfNotes();
-	cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
-	int i;
 	
-	pack << osc::BeginBundleImmediate
-	<< osc::BeginMessage( "/pitch" );
+	Chord* c;
+	map<float,int> durations;
+	int tmp;
+	
+	for(int j=0;j<piece->getNumberOfChords();++j)
+	{
+		tmp = 0;
+		durations.clear();
+		
+		c = piece->getChord(j);
+		
+		int nbNotes = c->getNumberOfNotes();
+		cout <<"Numbre of notes of Chord 1 : "<< nbNotes << endl;
+		int i;
+		
+		pack.Clear();
+		
+		pack << osc::BeginBundleImmediate
+			<< osc::BeginMessage( "/pitch" );
 		for(i = 0;i<nbNotes;i++){
 			cout <<"note "<<i<<"---------------"<<endl;
 			cout <<"midi : "<<c->getNote(i)->getMidi() << endl;
 			cout <<"time : "<<c->getNote(i)->getDuration() << endl;
 			pack << c->getNote(i)->getMidi();	
 		}
-	pack << osc::EndMessage;
-	pack << osc::BeginMessage("/duration");
+		pack << osc::EndMessage;
+		pack << osc::BeginMessage("/duration");
 		for(i = 0;i<nbNotes;i++){
-			pack << c->getNote(i)->getDuration()*1000;	
+			pack << c->getNote(i)->getDuration()*piece->getBaseDuration();
+			
+			if(!durations[c->getNote(i)->getDuration()])
+			{
+				durations[c->getNote(i)->getDuration()] = 1;
+			}
+			else
+			{
+				++durations[c->getNote(i)->getDuration()];
+			}
 		}
-	pack << osc::EndMessage;
-	pack << osc::EndBundle;
-	
+		pack << osc::EndMessage;
+		pack << osc::EndBundle;
+		
+		cout << "transmit" << endl;
+		transmitSocket.Send( pack.Data(), pack.Size() );
+		
+		for(map<float,int>::iterator it=durations.begin(); it!=durations.end(); ++it)
+		{
+            tmp = it->second;
+            if(tmp >= c->getNumberOfNotes()*2/3)
+            {
+				usleep(it->first*piece->getBaseDuration()*1000);
+				break;
+			}
+		}
+	}
 
-     //      << 65 << 23 << osc::EndMessage
-     // << osc::BeginMessage( "/test2" ) 
-     //    << 5 << 24 << (float)10.8 << "world" << osc::EndMessage
-     //<< osc::EndBundle;
-    
-    transmitSocket.Send( pack.Data(), pack.Size() );
+	pthread_exit(NULL);
 }
 
 void OscTransmitter::setPiece(Piece* _piece)

@@ -5,7 +5,7 @@ SeventhChordConstraint::SeventhChordConstraint()
 	setCoeff(1);
 }
 
-int SeventhChordConstraint::eval(Chord* _chord)
+float SeventhChordConstraint::eval(Chord* _chord)
 {
 	bool valid = false;
 	int nbNotes = 4;
